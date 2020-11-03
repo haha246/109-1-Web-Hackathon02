@@ -24,23 +24,49 @@ class Sudoku extends Component {
 
     handle_grid_1x1_click = (row_index, col_index) => {
         // TODO
-
+		
+		if (this.state.problem.content[row_index][col_index] !== "0") {
+			
+			return}
+		else{
+		const haha = document.getElementById(`grid-${row_index}*${col_index}`)
+		haha.style.background = '#333'
+		haha.style.color = '#FFF'
+		this.setState({selectedGrid: {row_index: row_index, col_index: col_index} })
+		}
+        
         // Useful hints:
-        // console.log(row_index, col_index)
-        // console.log(this.state.selectedGrid)
+		
+         
     }
 
     handleKeyDownEvent = (event) => {
         // TODO
-
+        
         // Useful hints:
-        // console.log(event)
-        // if (this.state.gridValues !== null && this.state.selectedGrid.row_index !== -1 && this.state.selectedGrid.col_index !== -1 && (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)) {}
-        // if (this.state.problem.content[this.state.selectedGrid.row_index][this.state.selectedGrid.col_index] === "0") {}
+        
+		if(this.state.selectedGrid.col_index !== -1){
+			if (this.state.gridValues !== null && this.state.selectedGrid.row_index !== -1 && this.state.selectedGrid.col_index !== -1 && (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)) {
+			
+			 let a = this.state.gridValues
+			 a[this.state.selectedGrid.row_index][this.state.selectedGrid.col_index] = event.key
+			 this.setState({gridValues: a})
+			 
+		 }
+		}
+		
+		
+       
+         
     }
 
     handleScreenKeyboardInput = (num) => {
         // TODO
+		if(num === 0)  return
+		let a = this.state.gridValues
+	    a[this.state.selectedGrid.row_index][this.state.selectedGrid.col_index] = num
+	    this.setState({gridValues: a})
+		
     }
 
     componentDidMount = () => {
